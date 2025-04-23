@@ -1,5 +1,7 @@
 package org.example.payment_service.config;
 
+import com.fasterxml.jackson.databind.ObjectMapper;
+import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.example.payment_service.model.enums.PaymentTransactionCommand;
 import org.example.payment_service.service.handler.CancelPaymentTransactionHandler;
 import org.example.payment_service.service.handler.CreatePaymentTransactionHandler;
@@ -22,5 +24,12 @@ public class PaymentTransactionCommandConfig {
         commandHandlers.put(PaymentTransactionCommand.CREATE, createPaymentTransactionHandler);
         commandHandlers.put(PaymentTransactionCommand.REFUND, cancelPaymentTransactionHandler);
         return commandHandlers;
+    }
+
+    @Bean
+    public ObjectMapper objectMapper () {
+        var objectMapper = new ObjectMapper();
+        objectMapper.registerModule(new JavaTimeModule());
+        return objectMapper;
     }
 }

@@ -7,6 +7,7 @@ import org.example.payment_service.model.entity.BankAccount;
 import org.example.payment_service.repository.BankAccountRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Slf4j
@@ -18,5 +19,10 @@ public class BankAccountService {
     @Transactional
     public Optional<BankAccount> findById(Long id) {
         return bankAccountRepository.findById(id);
+    }
+
+
+    public saveAll(List<BankAccount> sourceBankAccount) {
+        return sourceBankAccount.;
     }
 }

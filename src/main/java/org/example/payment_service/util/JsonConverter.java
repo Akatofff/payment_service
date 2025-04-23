@@ -18,4 +18,13 @@ public class JsonConverter {
             throw new RuntimeException(e);
         }
     }
+
+    public String toJson(Object object) {
+        try {
+            return mapper.writeValueAsString(object);
+        } catch (JsonProcessingException e) {
+            log.error("Json serializing exception: " + e.getMessage());
+            throw new RuntimeException(e);
+        }
+    }
 }
