@@ -4,7 +4,6 @@ import lombok.Getter;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
-@Getter
 public enum PaymentTransactionCommand {
     CREATE,
     REFUND,
@@ -12,10 +11,10 @@ public enum PaymentTransactionCommand {
 
     public static PaymentTransactionCommand fromString(String command) {
         try {
-            return PaymentTransactionCommand.valueOf(command);
+            return valueOf(command.toUpperCase());
         } catch (IllegalArgumentException e) {
             log.error(e.getMessage());
-            return UNKNOWN;
+            return null;
         }
     }
 }

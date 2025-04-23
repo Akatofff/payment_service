@@ -9,7 +9,6 @@ import org.example.payment_service.model.dto.enums.CommandResultStatus;
 @NoArgsConstructor
 @AllArgsConstructor
 public class CancelPaymentTransactionResponse {
-    private Long refundId;
     private CommandResultStatus status;
     private String errorMessage;
 }

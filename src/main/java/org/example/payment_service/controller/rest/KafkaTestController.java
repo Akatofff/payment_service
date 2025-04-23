@@ -35,10 +35,9 @@ public class KafkaTestController {
         );
 
         producer.sendCommandResult(
-                PaymentTransactionProducer.COMMAND_TOPIC,
-                requestId,
-                jsonConverter.toJson(request),
-                PaymentTransactionCommand.CREATE
+                request.getSourceAccountId(),
+                PaymentTransactionCommand.CREATE,
+                jsonConverter.toJson(request)
         );
 
         return "Create payment command sent with requestId: " + requestId;
@@ -55,10 +54,9 @@ public class KafkaTestController {
         );
 
         producer.sendCommandResult(
-                PaymentTransactionProducer.COMMAND_TOPIC,
-                requestId,
-                jsonConverter.toJson(request),
-                PaymentTransactionCommand.REFUND
+                request.getTransactionId(),
+                PaymentTransactionCommand.CREATE,
+                jsonConverter.toJson(request)
         );
 
         return "Cancel payment command sent with requestId: " + requestId;

@@ -13,31 +13,23 @@ import org.springframework.stereotype.Component;
 @Component
 @RequiredArgsConstructor
 public class PaymentTransactionProducer {
-    public final static String RESULT_TOPIC = "payment-command-result";
-    public final static String COMMAND_TOPIC = "payment-command";
+    public static final String TOPIC = "payment-command-result";
+    private final KafkaTemplate<String, String> kafkaTemplate;
 
-    private final static String PAYMENT_TRANSACTION_COMMAND_TYPE_HEADER = "command";
-    private final KafkaTemplate<String,String> kafkaTemplate;
+    public <T> void sendCommandResult(Long requestId, PaymentTransactionCommand commandType, String message) {
+        var kafkaMessage = buildMessage(commandType, requestId, message);
 
-    public void sendCommandResult(String topic,
-                                  String requestId,
-                                  String message,
-                                  PaymentTransactionCommand command) {
-        var kafkaMessage = buildMessage(topic, requestId, message, command);
-        kafkaTemplate.send(
-                kafkaMessage
-        );
-        log.info("Successfully send command result: {}", kafkaMessage);
+        kafkaTemplate.send(kafkaMessage);
+        log.info("Sent command result: {}", message);
     }
 
-    private Message<String> buildMessage(String topic,
-                                 String requestId,
-                                 String message,
-                                 PaymentTransactionCommand command) {
-        return MessageBuilder.withPayload(message)
-                .setHeader(KafkaHeaders.TOPIC, topic)
+    private Message<String> buildMessage(PaymentTransactionCommand commandType, Long requestId, String payload) {
+        return MessageBuilder
+                .withPayload(payload)
+                .setHeader(KafkaHeaders.TOPIC, TOPIC)
                 .setHeader(KafkaHeaders.KEY, requestId)
-                .setHeader(PAYMENT_TRANSACTION_COMMAND_TYPE_HEADER, command.toString())
+                .setHeader("commandType", commandType)
                 .build();
     }
+
 }

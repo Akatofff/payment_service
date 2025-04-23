@@ -3,7 +3,7 @@ package org.example.payment_service.config;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import com.fasterxml.jackson.datatype.jsr310.JavaTimeModule;
 import org.example.payment_service.model.enums.PaymentTransactionCommand;
-import org.example.payment_service.service.handler.CancelPaymentTransactionHandler;
+import org.example.payment_service.service.handler.RefundPaymentTransactionHandler;
 import org.example.payment_service.service.handler.CreatePaymentTransactionHandler;
 import org.example.payment_service.service.handler.PaymentTransactionCommandHandler;
 import org.springframework.context.annotation.Bean;
@@ -18,11 +18,11 @@ public class PaymentTransactionCommandConfig {
     @Bean
     public Map<PaymentTransactionCommand, PaymentTransactionCommandHandler> commandHandlers(
             CreatePaymentTransactionHandler createPaymentTransactionHandler,
-            CancelPaymentTransactionHandler cancelPaymentTransactionHandler
+            RefundPaymentTransactionHandler refundPaymentTransactionHandler
     ) {
         Map<PaymentTransactionCommand, PaymentTransactionCommandHandler> commandHandlers = new HashMap<>();
         commandHandlers.put(PaymentTransactionCommand.CREATE, createPaymentTransactionHandler);
-        commandHandlers.put(PaymentTransactionCommand.REFUND, cancelPaymentTransactionHandler);
+        commandHandlers.put(PaymentTransactionCommand.REFUND, refundPaymentTransactionHandler);
         return commandHandlers;
     }
 

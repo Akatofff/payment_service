@@ -19,4 +19,12 @@ public class CreatePaymentTransactionRequest {
     @NotNull
     private String currency;
     private String description;
+
+    public @NotNull Long getSourceAccountId() {
+        return sourceBankAccountId;
+    }
+
+    public @NotNull Long getDestinationAccountId() {
+        return destinationBankAccountId;
+    }
 }

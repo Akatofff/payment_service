@@ -6,7 +6,12 @@ import lombok.Getter;
 import java.util.List;
 
 @Getter
-@AllArgsConstructor
 public class PaymentTransactionValidationException extends RuntimeException {
-    private List<String> errors;
+    private final List<String> errors;
+
+    public PaymentTransactionValidationException(List<String> errors) {
+        super("Transaction validation failed");
+        this.errors = errors;
+    }
+
 }

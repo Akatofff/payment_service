@@ -26,6 +26,6 @@ public class Refund extends BaseEntity {
     private RefundStatus status;
 
     @ManyToOne
-    @JoinColumn(name = "paymentTransactionId", referencedColumnName = "id")
+    @JoinColumn(name = "paymentTransactionId", referencedColumnName = "id", nullable = false)
     private PaymentTransaction paymentTransaction;
 }

@@ -27,7 +27,7 @@ public class PaymentTransaction extends BaseEntity{
     private String errorMessage;
 
     @ManyToOne
-    @JoinColumn(name = "sourceBankAccountId")
+    @JoinColumn(name = "sourceBankAccountId", nullable = false)
     private BankAccount sourceBankAccount;
 
     @ManyToOne
@@ -36,4 +36,8 @@ public class PaymentTransaction extends BaseEntity{
 
     @OneToMany(mappedBy = "paymentTransaction", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Refund> refunds;
+
+    public PaymentTransactionStatus getStatus() {
+        return paymentTransactionStatus;
+    }
 }

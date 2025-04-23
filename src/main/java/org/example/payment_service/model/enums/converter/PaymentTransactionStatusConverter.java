@@ -7,12 +7,12 @@ import org.example.payment_service.model.enums.PaymentTransactionStatus;
 @Converter(autoApply = true)
 public class PaymentTransactionStatusConverter implements AttributeConverter<PaymentTransactionStatus, String> {
     @Override
-    public String convertToDatabaseColumn(PaymentTransactionStatus attribute) {
-        return attribute == null ? null : attribute.name();
+    public String convertToDatabaseColumn(PaymentTransactionStatus status) {
+        return (status == null) ? null : status.name();
     }
 
     @Override
     public PaymentTransactionStatus convertToEntityAttribute(String dbData) {
-        return dbData == null ? null : PaymentTransactionStatus.fromString(dbData);
+        return (dbData == null) ? null : PaymentTransactionStatus.fromString(dbData);
     }
 }
