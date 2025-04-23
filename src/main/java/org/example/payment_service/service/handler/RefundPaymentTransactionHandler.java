@@ -3,6 +3,7 @@ package org.example.payment_service.service.handler;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.payment_service.controller.kafka.producer.PaymentTransactionProducer;
+import org.example.payment_service.model.dto.CancelPaymentTransactionRequest;
 import org.example.payment_service.model.enums.PaymentTransactionCommand;
 import org.example.payment_service.service.PaymentTransactionValidator;
 import org.example.payment_service.service.RefundService;
@@ -20,7 +21,7 @@ public class RefundPaymentTransactionHandler implements PaymentTransactionComman
 
     @Override
     public void processCommand(Long requestId, String message) {
-        var request = jsonConverter.fromJson(message, CancelPaymentRequest.class);
+        var request = jsonConverter.toJson(CancelPaymentTransactionRequest.class);
         paymentTransactionValidator.validateCancelTransactionRequest(request);
         var result = refundService.cancelPayment(request);
 

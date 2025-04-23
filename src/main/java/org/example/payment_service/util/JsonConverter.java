@@ -3,6 +3,7 @@ package org.example.payment_service.util;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import lombok.extern.slf4j.Slf4j;
+import org.example.payment_service.model.dto.CreatePaymentTransactionRequest;
 import org.springframework.stereotype.Component;
 
 @Slf4j
@@ -26,5 +27,8 @@ public class JsonConverter {
             log.error("Json serializing exception: " + e.getMessage());
             throw new RuntimeException(e);
         }
+    }
+
+    public Object fromJson(String message, Class<CreatePaymentTransactionRequest> createPaymentTransactionRequestClass) {
     }
 }

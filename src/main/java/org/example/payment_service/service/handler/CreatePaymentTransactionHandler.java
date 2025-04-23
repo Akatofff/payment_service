@@ -1,6 +1,5 @@
 package org.example.payment_service.service.handler;
 
-import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.example.payment_service.controller.kafka.producer.PaymentTransactionProducer;
@@ -34,7 +33,7 @@ public class CreatePaymentTransactionHandler implements PaymentTransactionComman
 
         var sourceAccount = bankAccountService.findOptionalById(request.getSourceAccountId()).get();
         BankAccount destinationBankAccount = null;
-        if(request.getDestinationAccountId() != null){
+        if (request.getDestinationAccountId() != null) {
             destinationBankAccount = bankAccountService.findOptionalById(request.getDestinationAccountId()).get();
         }
 
